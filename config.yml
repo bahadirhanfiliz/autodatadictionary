@@ -1,0 +1,43 @@
+feature:
+  sample_value: True
+  source: True
+  non_null_count: True
+  unique_count: True
+  dtype: True
+  unique_val_list: True
+
+parameters:
+  unique_val_length: 15
+
+data:
+  folder_path: C:\Users\09371185\Desktop\Project
+  separator: ";"
+  output_filename: "DataDictionary_DAAS.xlsx"
+  db_connection: True
+  datasets:
+    traktor_anaveri: "Traktor Anaveri_v2.csv"
+    case_transactions: "case_transactions.csv"
+    nh_transactions: "nh_transactions.csv"
+    yerli_price: "yerli_price.csv"
+    ithal_price: "ithal_price.csv"
+    bayi: "bayi anaveri_aktif pasif_v2.csv"
+    tuik: "Ham data 1995-2021(2).csv"
+    memorandum: "2016-2021 MemorandumGiriş.csv"
+    second_hand: "2nd hand raw data_2010-2021(3).csv"
+    tiv: "2021 TIV ve RT adetler.csv"
+    sellin_trasactions: "sell-in transaction 2016-2021.csv"
+    il_bolge: "İl-bölge eşleşmesi.csv"
+
+db:
+  connection:
+    server_name:
+    db_name:
+    user_name:
+    pass_word:
+    port:
+    schema:
+  limit: 10
+  use_all_tables: True
+  table_names:
+    - inflation_tufe
+    - inflation_ufe
