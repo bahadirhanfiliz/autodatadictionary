@@ -35,3 +35,6 @@ Generate data dictionary from dataframe
    ad.to_dictionary_from_dataframe([titanic])
    ad.to_dictionary_from_dataframe(dataframes=[titanic], source_names=['titanic_dataframe'], source=True)
    ```
+   
+### Example output
+![Screen Shot 2022-02-27 at 01 16 40](https://user-images.githubusercontent.com/46743449/155861236-788aad71-6beb-4c99-9fce-844a19f9a781.png)
