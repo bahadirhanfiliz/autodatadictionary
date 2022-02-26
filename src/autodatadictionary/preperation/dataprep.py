@@ -1,8 +1,8 @@
 from box import Box
 import pandas as pd
 
-import src.autodatadictionary.db.sqlalchemydb as sql
-from src.autodatadictionary.utils.dataloader import DataLoader
+from ..db.sqlalchemydb import SQLAlchemyDB
+from ..utils.dataloader import DataLoader
 
 
 class DataPrep:
@@ -19,8 +19,20 @@ class DataPrep:
 
         return data_list
 
+    @staticmethod
+    def load_df_data(dataframes: [pd.DataFrame], source_names: [str]) -> [pd.DataFrame]:
+        data_list = []
+        if source_names is not None:
+            for i, df in enumerate(dataframes):
+                df.attrs["source"] = source_names[i]
+                data_list.append(df)
+        else:
+            data_list = dataframes
+
+        return data_list
+
     def load_db_data(self) -> [pd.DataFrame]:
-        sqlalchemydb = sql.SQLAlchemyDB(config=self.config)
+        sqlalchemydb = SQLAlchemyDB(config=self.config)
 
         if self.config.db.table_names is None:
             table_names = sqlalchemydb.get_all_table_names()

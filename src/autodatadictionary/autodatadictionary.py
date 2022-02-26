@@ -1,8 +1,43 @@
 import pandas as pd
 from box import Box
 
-from src.autodatadictionary.analysis.dictionarygenerator import DictionaryGenerator
-from src.autodatadictionary.preperation.dataprep import DataPrep
+from .analysis.dictionarygenerator import DictionaryGenerator
+from .preperation.dataprep import DataPrep
+
+
+def to_dictionary_from_dataframe(dataframes: [pd.DataFrame], source_names: [str] = None,
+                                 sample_value: bool = True, source: bool = False, non_null_count: bool = True,
+                                 unique_count: bool = True, dtype: bool = True, unique_val_list: bool = True,
+                                 unique_val_length: int = 15) -> pd.DataFrame:
+    """
+    Generates data dictionary from files, returns the dictionary as a dataframe
+    @param dataframes: List of dataframes that will be processed
+    @param source_names: List of source_names that will be mapped with the dataframe
+    @param sample_value: Flag, whether to include sample value from data
+    @param source: Flag, whether to include source
+    @param non_null_count: Flag, whether to include non_null_count
+    @param unique_count: Flag, whether to include unique_count
+    @param dtype: Flag, whether to include dtypes
+    @param unique_val_list: Flag, whether to include unique_val_list
+    @param unique_val_length: How many unique values to show, if unique_val_list is True
+    @return: Data Dictionary as a dataframe
+    """
+    if source:
+        if source_names is None:
+            raise ValueError('If source argument is True, then you need to pass source_names List of Strings')
+        if len(dataframes) != len(source_names):
+            raise ValueError('source_names list does not have the same length as dataframes list')
+
+    config = Box({"feature": {"sample_value": sample_value, "source": source, 'non_null_count': non_null_count,
+                              "unique_count": unique_count, "dtype": dtype, 'unique_val_list': unique_val_list},
+                  "parameters": {"unique_val_length": unique_val_length}})
+
+    dp = DataPrep(config)
+    data_list = dp.load_df_data(dataframes=dataframes, source_names=source_names)
+
+    dg = DictionaryGenerator(config)
+    output = dg.all_dictionary_handler(data_list)
+    return output
 
 
 def to_dictionary_from_file(paths: [str], sep: str = ',',

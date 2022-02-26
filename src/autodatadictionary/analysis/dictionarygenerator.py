@@ -87,6 +87,7 @@ class DictionaryGenerator:
         """
         results = pd.DataFrame()
         for df in df_list:
-            results = results.append(self.dictionary_handler(df=df, source=df.attrs["source"]))
+            source = df.attrs["source"] if "source" in df.attrs else None
+            results = results.append(self.dictionary_handler(df=df, source=source))
 
         return results
