@@ -11,7 +11,7 @@ AutoDataDictionary generates data dictionary from source files and database tabl
 
 ### How to use
 
-Generate data dictionary from db like below
+Generate data dictionary from db
    ```{python}
    import autodatadictionary as ad
    ad.to_dictionary_from_db(
@@ -19,7 +19,7 @@ Generate data dictionary from db like below
         schema='schema')
    ```
 
-Generate data dictionary from csv files like below
+Generate data dictionary from csv files
    ```{python}
    import autodatadictionary as ad
    ad.to_dictionary_from_file(['/path/data1.csv', '/path/data2.csv', '/path/dataN.csv'], sep=',')
