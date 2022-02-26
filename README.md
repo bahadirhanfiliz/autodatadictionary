@@ -1,4 +1,4 @@
-# DataDictionary
+# AutoDataDictionary
 
 AutoDataDictionary generates data dictionary from source files and database tables including:
   - Column Name
