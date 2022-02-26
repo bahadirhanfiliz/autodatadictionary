@@ -1,6 +1,6 @@
 # DataDictionary
 
-DataDictionary generates data dictionary files (currently Excel) from source files including:
+AutoDataDictionary generates data dictionary from source files and database tables including:
   - Column Name
   - Sample Value
   - Source File Name
@@ -9,9 +9,18 @@ DataDictionary generates data dictionary files (currently Excel) from source fil
   - Data Type
   - Unique Values List
 
-1. Create conda environment from environment file ```conda env create -f environment.yml```
-2. Activate environment ```conda activate datadictionary```
-3. Modify ```config.yml``` file. Make sure you change the PATH and the filenames!
+### How to use
 
-## Example Output
-![image](https://user-images.githubusercontent.com/46743449/125202266-7d8a4300-e27b-11eb-9221-1c1889aca542.png)
+Generate data dictionary from db like below
+   ```{python}
+   import autodatadictionary as ad
+   ad.to_dictionary_from_db(
+        sql_alchemy_connection_string='postgresql://username:password@domain:5432/db',
+        schema='schema')
+   ```
+
+Generate data dictionary from csv files like below
+   ```{python}
+   import autodatadictionary as ad
+   ad.to_dictionary_from_file(['/path/data1.csv', '/path/data2.csv', '/path/dataN.csv'], sep=',')
+   ```

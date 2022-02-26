@@ -4,6 +4,11 @@ import pandas as pd
 
 
 class DictionaryGenerator:
+    """
+    This class has two main methods, that handles single table data dictionary operation and combines
+    the data dictionaries.
+    """
+
     def __init__(self, config: Box):
         self.feature = config.feature
         self.unique_val_length = config.parameters.unique_val_length
@@ -75,6 +80,11 @@ class DictionaryGenerator:
         return output
 
     def all_dictionary_handler(self, df_list) -> pd.DataFrame:
+        """
+        Gets the tables and generates data dictionary
+        @param df_list: List of dataframes that will be processed
+        @return: Data Dictionary of the selected tables
+        """
         results = pd.DataFrame()
         for df in df_list:
             results = results.append(self.dictionary_handler(df=df, source=df.attrs["source"]))
